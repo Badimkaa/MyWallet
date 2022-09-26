@@ -1,15 +1,35 @@
-import { SectionTitle, SectionWrapper } from '../../../utils/utils'
-import CostsContainer from './Costs/CostsContainer'
-import Income from './Income/Income'
+import { SectionTitle, SectionWrapper } from "../../../utils/utils";
+import CategoryBlock from "./CategoryBlock";
 
-const Categories = () => {
+const Categories = ({
+  allCategories,
+  addCategory,
+  deleteCategory,
+  setSelectedCategory,
+  calculateTotalSum,
+}) => {
+  const categoriesBlocksList = [
+    { label: "Расходы", category: "costs" },
+    { label: "Доходы", category: "income" },
+  ].map(({ label, category }) => {
     return (
-        <SectionWrapper direction='column' align='center'>
-            <SectionTitle>Категории</SectionTitle>
-            <CostsContainer />
-            <Income></Income>
-        </SectionWrapper>
-    )
-}
+      <CategoryBlock
+        label={label}
+        category={category}
+        allCategories={allCategories}
+        addCategory={addCategory}
+        deleteCategory={deleteCategory}
+        setSelectedCategory={setSelectedCategory}
+        calculateTotalSum={calculateTotalSum}
+      />
+    );
+  });
+  return (
+    <SectionWrapper direction="column" align="center">
+      <SectionTitle>Категории</SectionTitle>
+      {categoriesBlocksList}
+    </SectionWrapper>
+  );
+};
 
-export default Categories
+export default Categories;

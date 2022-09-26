@@ -11,5 +11,5 @@ export const VerticalLine = styled.div`
 min-height: 100%;
 width: 3px;
 /* TODO:: изменить цвет  */
-background-color:aliceblue;
+background-color:black;
 `

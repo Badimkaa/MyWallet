@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { Input, Menu, MenuWrapper } from './Style'
 
-const AddMenu = ({ isAddOpen, addCostsCategory, setIsAddOpen }) => {
+const AddMenu = ({ setIsAddOpen, addCategory, category }) => {
+
     let [name, setName] = useState('')
     let addNewCategory = () => {
-        addCostsCategory(name)
+        addCategory(name, category)
         setIsAddOpen(false)
         setName('')
     }
@@ -22,7 +23,6 @@ const AddMenu = ({ isAddOpen, addCostsCategory, setIsAddOpen }) => {
                 <button disabled={!name && true} onClick={addNewCategory}>Добавить</button>
                 <button onClick={exitAddMenu}>Отмена</button>
             </Menu>
-
         </MenuWrapper>
         , document.body)
 }

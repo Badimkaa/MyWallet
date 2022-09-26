@@ -1,16 +1,14 @@
 import { AppWrapper } from "./AppStyle";
-import Header from "./components/Header/Header";
+import HeaderContainer from "./components/Header/HeaderContainer";
 import Main from "./components/Main/Main";
 
 const App = () => {
+  
   return (
-    // <div>
     <AppWrapper align='center' direction='column'>
-      <Header />
+      <HeaderContainer />
       <Main />
     </AppWrapper>
-
-    // </div>
   );
 }
 

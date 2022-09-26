@@ -17,7 +17,7 @@ export const SectionTitle = styled.p`
 font-size:26px;
 font-weight:bold;
 `
-export const CategoriesWrapper = styled(Flex)`
+export const Wrapper = styled(Flex)`
 height:500px;
 flex-direction:column;
 align-items:center;

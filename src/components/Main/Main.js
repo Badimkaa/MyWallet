@@ -1,15 +1,15 @@
-import Categories from './Categories/Categories'
-import Finance from './Finance/Finance'
-import { MainWrapper, VerticalLine } from './Style'
+import CategoriesContainer from "./Categories/CategoriesContainer";
+import FinanceContainer from "./Finance/FinanceContainer";
+import { MainWrapper, VerticalLine } from "./Style";
 
 const Main = () => {
-    return (
-        <MainWrapper as='main' justify='space-between'>
-            <Categories />
-            <VerticalLine />
-            <Finance />
-        </MainWrapper>
-    )
-}
+  return (
+    <MainWrapper as="main" justify="space-between">
+      <CategoriesContainer />
+      <VerticalLine />
+      <FinanceContainer />
+    </MainWrapper>
+  );
+};
 
-export default Main
+export default Main;

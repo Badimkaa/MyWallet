@@ -1,0 +1,1 @@
+export const selectedCategory = (state) => state.allCategories.find(c => c.isActive === true)
