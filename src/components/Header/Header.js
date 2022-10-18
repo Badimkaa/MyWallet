@@ -1,36 +1,31 @@
 import axios from "axios";
-import React from "react";
-import logo from "../../assets/images/logo.png";
-import {
-  AbsoluteDiv,
-  FlexDiv,
-  HeaderTag,
-  HeaderWrapper,
-  Logo,
-  ProjectName,
-} from "./Style";
-const Header = ({ totalSum }) => {
-  // const getCurrency = () => {
-  //   return axios
-  //     .get(
-  //       "https://api.currencyapi.com/v3/latest?apikey=OvzXyH9P2gajC111ZIRpYYOvfJSHZKbNEadjK1T5&currencies=USD,RUB"
-  //     )
-  //     .then((res) => res.data.data);
-  // };
-  // const tes = async () => {
-  //   return await getCurrency();
-  // };
-  // let obj = tes();
-  // console.log(obj);
+import { useEffect, useState } from "react";
 
+import logo from "../../assets/images/logo.png";
+import { FlexDiv, HeaderTag, HeaderWrapper, Logo, ProjectName } from "./Style";
+const getCurrency = (setCur) => {
+  return axios
+    .get(
+      "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/usd.json"
+    )
+    .then((res) => setCur(res.data.usd.rub));
+};
+const Header = ({ totalSum }) => {
+  const [usdToRUB, setUsdToRUB] = useState(null);
+  useEffect(() => {
+    getCurrency(setUsdToRUB);
+  }, []);
   return (
     <HeaderTag as="header">
-      <HeaderWrapper justify="flex-start" align="center">
-        <AbsoluteDiv align="center" justify="space-between">
+      <HeaderWrapper justify="space-between" align="center">
+        <FlexDiv align="center">
           <Logo src={logo} />
           <ProjectName>MyWallet</ProjectName>
-        </AbsoluteDiv>
-        <FlexDiv justify="center">Баланс: {totalSum} р</FlexDiv>
+        </FlexDiv>
+        <FlexDiv justify="center">Баланс: {totalSum}р</FlexDiv>
+        {usdToRUB && (
+          <FlexDiv justify="right">1USD = {usdToRUB.toFixed(3)}р</FlexDiv>
+        )}
       </HeaderWrapper>
     </HeaderTag>
   );

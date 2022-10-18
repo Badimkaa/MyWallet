@@ -1,7 +1,8 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Flex from "../../../utils/utils";
 
 export const Item = styled(Flex)`
+  padding: 10px;
   position: relative;
   width: 200px;
   height: 100px;
@@ -12,30 +13,39 @@ export const Item = styled(Flex)`
   color: ${(props) => (props.isActive ? "rgb(255,255,255)" : "rgb(0,0,0)")};
   cursor: pointer;
   transition: 0.3s;
-  /* box-shadow: inset 0 -5px 5px -5px rgb(240,62,50); */
-  /* box-shadow: 0px 0px 14px -10px rgba(34, 60, 80, 0.67); */
+  box-shadow: 0px 17px 15px -12px rgba(139, 76, 71, 0.2);
   &:hover {
     transform: scale(1.1);
-    /* box-shadow: 0px 0px 14px -4px rgba(34, 60, 80, 1); */
-    box-shadow: 0px 0px 24px -14px rgba(240, 62, 50, 1);
+    box-shadow: rgba(139, 76, 71, 0.2) -4px 9px 25px -6px;
+  }
+  @media (max-width: 1366px) {
+    width: 160px;
+    height: 80px;
   }
 `;
-
+export const Label = styled.div`
+  font-weight: bold;
+`;
 export const ItemName = styled.p`
-  word-break: break-all;
+  width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+export const ItemContent = styled(Flex)`
+  height: 100%;
 `;
 export const DelItem = styled(Flex)`
   position: absolute;
-  transition:.1s;
+  transition: 0.1s;
   bottom: 0;
   right: 0;
   width: 100%;
   height: 100%;
-  background-color:rgba(240,62,50, .05);
+  background-color: rgba(240, 62, 50, 0.05);
   /* border: 3px solid black; */
   /* border-radius: 50%; */
   filter: ${(props) => props.isActive && "invert(100%)"};
- 
 `;
 export const Image = styled.img`
   position: absolute;
@@ -44,7 +54,6 @@ export const Image = styled.img`
   width: 30px;
   height: 30px;
   border-radius: 12px;
-  /* transform: translate(50%, -50%); */
   opacity: 0.9;
   transition: 0.2s;
   &:hover {

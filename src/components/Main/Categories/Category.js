@@ -1,7 +1,7 @@
 import { useState } from "react";
 import deleteUrl from "../../../assets/images/delete.png";
 import ConfirmDelete from "../../common/ConfirmDelete";
-import { DelItem, Image, Item, ItemName } from "./Style";
+import { DelItem, Image, Item, ItemName, ItemContent } from "./Style";
 
 const Category = ({
   name,
@@ -18,18 +18,20 @@ const Category = ({
   };
 
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const delItem = (e) => {
+  const delItem = () => {
     isDelOpen ? setConfirmDelete(true) : selectCategory();
   };
   return (
     <Item
-      justify="space-evenly"
+      // justify="space-evenly"
       isActive={isActive}
       align="center"
       onClick={delItem}
     >
-      <ItemName>{name}</ItemName>
-      <div>{sum}</div>
+      <ItemContent justify="space-evenly" direction="column">
+        <ItemName title={name}>{name}</ItemName>
+        <ItemName title={`${sum}р`}>{sum}р</ItemName>
+      </ItemContent>
       {isDelOpen && (
         <DelItem justify="center" align="center" isActive={isActive}>
           <Image src={deleteUrl} />

@@ -1,5 +1,6 @@
 import { Wrapper } from "../../../utils/utils";
 import CategoriesWrapper from "../../common/CategoriesWrapper";
+import { Label } from "./Style";
 
 const CategoryBlock = ({
   addCategory,
@@ -12,7 +13,7 @@ const CategoryBlock = ({
 }) => {
   return (
     <Wrapper direction="column">
-      <div>{label}</div>
+      <Label>{label}</Label>
       <CategoriesWrapper
         category={category}
         addCategory={addCategory}

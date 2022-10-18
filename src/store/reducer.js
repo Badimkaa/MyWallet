@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 const ADD_CATEGORY = "ADD_CATEGORY";
 const ADD_OPERATION = "ADD_OPERATION";
 const DELETE_CATEGORY = "DELETE_CATEGORY";
@@ -97,7 +98,7 @@ const mainReducer = (state = initialState, action) => {
         id: state.currentOperationsId,
         sum: +action.sum,
         note: action.note,
-        date: new Date().toLocaleString(),
+        date: new Date().toLocaleString().substring(0, 10),
       };
       return {
         ...state,

@@ -14,6 +14,7 @@ const Categories = ({
   ].map(({ label, category }) => {
     return (
       <CategoryBlock
+        key={label}
         label={label}
         category={category}
         allCategories={allCategories}

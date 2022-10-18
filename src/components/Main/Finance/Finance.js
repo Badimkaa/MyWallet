@@ -1,7 +1,13 @@
 import { useState } from "react";
-import { SectionTitle, SectionWrapper } from "../../../utils/utils";
+import {
+  Button,
+  FlexBox,
+  SectionTitle,
+  SectionWrapper,
+} from "../../../utils/utils";
 import AddOperation from "../../common/AddOperation";
-import Operation from "./Operation/Operation";
+import OperationBlock from "./OperationBlock";
+import { Div, Info, Value } from "./Style";
 
 const Finance = ({
   selectedCategory,
@@ -15,34 +21,49 @@ const Finance = ({
   let openAddOperationModal = () => {
     setIsAddOpen(true);
   };
-  let operationsList =
-    selectedCategory &&
-    selectedCategory.operations.map((o) => {
-      return (
-        <Operation
-          deleteOperation={deleteOperation}
-          editOperation={editOperation}
-          calculateCategorySum={calculateCategorySum}
-          calculateTotalSum={calculateTotalSum}
-          o={o}
-        />
-      );
-    });
+  let isOperationsExist =
+    selectedCategory && selectedCategory.operations.length !== 0;
+
+  if (selectedCategory) {
+    selectedCategory.operations.length !== 0 ? (
+      <OperationBlock
+        selectedCategory={selectedCategory}
+        deleteOperation={deleteOperation}
+        editOperation={editOperation}
+        calculateCategorySum={calculateCategorySum}
+        calculateTotalSum={calculateTotalSum}
+      />
+    ) : (
+      "Нет операций"
+    );
+  }
   return (
     <SectionWrapper align="center" direction="column">
       {selectedCategory ? (
         <>
           <SectionTitle>Финансы</SectionTitle>
-          <div>Выбранная категория: {selectedCategory.name}</div>
-          <div>Сумма: {selectedCategory.sum}</div>
-          <div>
-            Операции:{" "}
-            {selectedCategory.operations.length !== 0 ? "yes" : "отсутствуют"}
-          </div>
-          <button onClick={openAddOperationModal}>Добавить</button>
+          <FlexBox width="100%" justify="space-between">
+            <Info justify="center" fs="22px" width="48%">
+              <Div>Категория:&nbsp;</Div>
+              <Value title={selectedCategory.name}>
+                {selectedCategory.name}
+              </Value>
+            </Info>
+            <Info justify="center" fs="22px" width="48%">
+              <Div>Сумма:&nbsp;</Div>
+              <Value title={`${selectedCategory.sum}р`}>
+                {selectedCategory.sum}р
+              </Value>
+            </Info>
+          </FlexBox>
+          <Button width="220px" onClick={openAddOperationModal}>
+            Добавить операцию
+          </Button>
         </>
       ) : (
-        <div>Выберите категорию слева</div>
+        <Info justify="center" align="center">
+          Выберите категорию слева
+        </Info>
       )}
       {isAddOpen && (
         <AddOperation
@@ -54,7 +75,20 @@ const Finance = ({
           calculateTotalSum={calculateTotalSum}
         />
       )}
-      {operationsList}
+      {isOperationsExist && (
+        <OperationBlock
+          selectedCategory={selectedCategory}
+          deleteOperation={deleteOperation}
+          editOperation={editOperation}
+          calculateCategorySum={calculateCategorySum}
+          calculateTotalSum={calculateTotalSum}
+        />
+      )}
+      {selectedCategory && !isOperationsExist && (
+        <Info justify="center" align="center">
+          Нет операций
+        </Info>
+      )}
     </SectionWrapper>
   );
 };

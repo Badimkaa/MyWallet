@@ -1,9 +1,8 @@
-import React from "react";
-import { Button, Wrapper } from "./Style";
+import { useState } from "react";
+import { Img, Cell, Pre } from "./Style";
 import change from "../../../../assets/images/change.png";
 import deleteUrl from "../../../../assets/images/delete.png";
 import ConfirmDelete from "../../../common/ConfirmDelete";
-import { useState } from "react";
 import AddOperation from "../../../common/AddOperation";
 
 const Operation = ({
@@ -19,18 +18,26 @@ const Operation = ({
   };
   const [confirmDelete, setConfirmDelete] = useState(false);
   return (
-    <Wrapper justify="space-between">
-      <div>{o.category}</div>
-      <div>{o.sum}</div>
-      <div>{o.date}</div>
-      <div>{o.note}</div>
-      <Button url={change} onClick={openAddOperationModal}></Button>
-      <Button
-        url={deleteUrl}
+    <>
+      <Cell justify="center" align="center">
+        {o.sum}р
+      </Cell>
+      <Cell justify="center" align="center">
+        {o.date}
+      </Cell>
+      <Pre>{o.note}</Pre>
+      <Cell primary justify="center" onClick={openAddOperationModal}>
+        <Img url={change} />
+      </Cell>
+      <Cell
+        primary
+        justify="center"
         onClick={() => {
           setConfirmDelete(true);
         }}
-      ></Button>
+      >
+        <Img url={deleteUrl} />
+      </Cell>
       {confirmDelete && (
         <ConfirmDelete
           whatDelete={"операцию"}
@@ -47,6 +54,8 @@ const Operation = ({
         <AddOperation
           buttonName={"Изменить"}
           updateState={editOperation}
+          prevNote={o.note}
+          prevSum={o.sum}
           id={o.id}
           isAddOpen={isAddOpen}
           isCategorySumFuncNeed={true}
@@ -55,7 +64,7 @@ const Operation = ({
           setIsAddOpen={setIsAddOpen}
         />
       )}
-    </Wrapper>
+    </>
   );
 };
 

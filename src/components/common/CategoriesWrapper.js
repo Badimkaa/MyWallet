@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Button } from "../../utils/utils";
 import Category from "../Main/Categories/Category";
 import AddMenu from "./AddMenu";
 import { Buttons, FlexDiv } from "./Style";
@@ -11,6 +12,7 @@ const CategoriesWrapper = ({
   addCategory,
   calculateTotalSum,
 }) => {
+  let minHeight = category === "costs";
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isDelOpen, setIsDelOpen] = useState(false);
   let сategoriesList = categories
@@ -37,17 +39,24 @@ const CategoriesWrapper = ({
   const clickDelButton = () => {
     isDelOpen ? setIsDelOpen(false) : setIsDelOpen(true);
   };
+  let isDisabled = false;
+  if (
+    (сategoriesList.length === 9 && category === "costs") ||
+    (сategoriesList.length === 6 && category === "income")
+  ) {
+    isDisabled = true;
+  }
   return (
     <>
       <Buttons>
-        <button disabled={сategoriesList.length === 9} onClick={clickAddButton}>
+        <Button disabled={isDisabled} onClick={clickAddButton}>
           Добавить
-        </button>
-        <button onClick={clickDelButton}>
+        </Button>
+        <Button isDelOpen={isDelOpen && isDelOpen} onClick={clickDelButton}>
           {isDelOpen ? "Отмена" : "Удалить"}
-        </button>
+        </Button>
       </Buttons>
-      <FlexDiv>{сategoriesList}</FlexDiv>
+      <FlexDiv minHeight={minHeight}>{сategoriesList}</FlexDiv>
       {isAddOpen && (
         <AddMenu
           category={category}
